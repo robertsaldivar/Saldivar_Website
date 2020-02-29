@@ -6,21 +6,29 @@ This will be a website to for sharing my code with future employers
 
 Biography:
 
+Resume:
 
-Data Wrangling and Visualization 
 
-
+Data Wrangling and Visualization:
 https://robertsaldivar.github.io/Saldivar_Website/example_code/HW1_Task1_RS.html
 
 
-Principle components analysis
-
-
-Geospatial analysis
+Principle components analysis:
+https://robertsaldivar.github.io/Saldivar_Website/example_code/HW1_Task2_RS.html
 
 
 Time Series analysis
+https://robertsaldivar.github.io/Saldivar_Website/example_code/Hw2_Task2.html
 
 
-Resume
+Geospatial analysis in R:
+https://robertsaldivar.github.io/Saldivar_Website/example_code/Hw2_Task3.html
+
+
+Interactive map with QGIS:
+https://robertsaldivar.github.io/ESM267-web/qgis2web/#7/43.871/-73.293
+
+
+
+
 
