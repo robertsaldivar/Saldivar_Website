@@ -9,7 +9,8 @@ Biography:
 
 Data Wrangling and Visualization 
 
-(https://robertsaldivar.github.io/Saldivar_Website/example_code/HW1_Task1_RS.html)
+
+https://robertsaldivar.github.io/Saldivar_Website/example_code/HW1_Task1_RS.html
 
 
 Principle components analysis
