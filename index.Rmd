@@ -1,0 +1,22 @@
+---
+title: "GH Pages Website"
+author: "Robert Saldivar"
+date: "March 1, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Biography:
+
+
+**Example Code**
+
+
+[Data Wrangling and Visualization](https://robertsaldivar.github.io/Saldivar_Website/Wrangling_Visualization)
+
+
+[Principle Components Analysis](https://robertsaldivar.github.io/Saldivar_Website/)
+
