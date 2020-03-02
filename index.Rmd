@@ -1,5 +1,5 @@
 ---
-title: "GH Pages Website"
+title: "Robert's Awesome Blog for Sharing Code"
 author: "Robert Saldivar"
 date: "March 1, 2020"
 output: html_document
@@ -19,4 +19,17 @@ Biography:
 
 
 [Principle Components Analysis](https://robertsaldivar.github.io/Saldivar_Website/)
+
+[Time Series Analysis](https://robertsaldivar.github.io/Saldivar_Website/time_series)
+
+
+[Geospatial Analysis in R](https://robertsaldivar.github.io/Saldivar_Website/Hawaii_Maps)
+
+
+
+[Interactive map with QGIS](https://robertsaldivar.github.io/ESM267-web/qgis2web/#7/43.871/-73.293)
+
+
+
+
 
