@@ -1,0 +1,125 @@
+---
+title: "Principle Components Analysis"
+author: "Robert Saldivar"
+date: "March 1, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = F, warning = F)
+```
+
+
+```{r, message=FALSE, warning=FALSE}
+#Loading the packages and the data that will be needed for this assignment.
+
+library(tidyverse)
+library(tidyr)
+library(RColorBrewer)
+library(here)
+library(kableExtra)
+library(knitr)
+library(janitor)
+library(naniar)
+library(VIM)
+library(skimr)
+library(ggfortify)
+#These are all of th packages that I think that I will use for this project
+
+env_vars <- read_csv(here("data", "world_env_vars.csv")) #This is the raw data that I think I will use for this project.
+
+```
+
+*Task 2*
+Principle Componets Analysis
+
+1. Description of the data and project.
+The data for this analysis was compiled and provided by @zander_venter which was gather from google earth engine. The data is of environmental variables of countries around the world. The analysis done in this Markdown document is a principle components analysis of the environmental variables and how they are displayed in a biplot.
+
+
+2. Code used to wrangle the data and a biplot
+
+
+```{r, message=FALSE, warning=FALSE}
+#Wrangling the data
+
+env_vars_tidy <- env_vars %>%
+  select(-Country) #This is removing the country column so that only the variables that can be included in a pca are in the data frame
+  
+```
+
+```{r}
+#Exploring the missingness of the environmental variables dataset
+
+summary(env_vars_tidy)
+
+gg_miss_var(env_vars_tidy)
+
+matrixplot(env_vars_tidy)
+
+#all of the categories have some level of missingness except cropland cover. Wind has the most missing variables at 55 missing.
+
+```
+
+```{r}
+env_vars_nona <- env_vars_tidy %>%
+  drop_na() #This is removing all of the rows in the data frame with NA values.
+
+#This dropped the number of rows from 243 to 188, a difference of 55 rows. This leaves 77% of the original data
+
+summary(env_vars_nona)
+skim(env_vars_nona) #this is to get a better sense of the data after the NA's have been dropped
+
+```
+
+```{r message=F, warning=F}
+# Creating a subset of the of the environmental variables so that there are not so many similar variable
+
+env_vars_subset <- env_vars_nona %>%
+  select(-rain_driestMonth, -rain_wettestMonth, -temp_max_warmestMonth, -temp_min_coldestMonth) # This is removing the columns that record measurements at the month scale. This is done because the quarter is also being measured which feels reduntant to me to have them other be analyzed. This still leaves 23 categories to be included in the PCA analysis
+```
+
+
+```{r, message=FALSE, warning=FALSE}
+#Running the Principle Compenents Analysis
+
+envs_vars_pca <- prcomp(env_vars_subset, scale = TRUE) #This code is running the PCA analysis, and scaling the variables so that they are all relative.
+
+envs_vars_pca
+summary(envs_vars_pca)
+#this calling the PCA and issuing a summary so that it can be better understood.
+
+```
+
+```{r, message=FALSE, warning=F}
+#Creating a biplot from the PCA
+
+
+env_vars_biplot <- autoplot(envs_vars_pca,
+                            colour = NA,
+                            loadings.label = TRUE,
+                            loadings.label.size = 3,
+                            loadings.label.colour = "black",
+                            loadings.label.repel = TRUE) +
+  theme_bw() +
+  scale_y_continuous(limits = c(-0.2, 0.2))#This is creating a biplot to graphically visualize the first two principle components.
+
+env_vars_biplot
+
+```
+**Figure 1. Principle Components Biplot of Environmental Variables** This be plot shows the relationship between the environmental variables in a two dimensional way, as a part of a principle components analysis.
+
+
+3. Key take aways from the PCA
+
+- The first two principle components account for 60.22% of the variance in this analysis. PC1 acounts for 36.94% and PC2 accounts for 23.28%.
+
+- The annual temperature range and the temperature seasonality are the two largest contributers in PC1, while accessiblity to cities is the smallest contributer in PC1.
+
+- The rain seasonality and the warmest temperature quarter are the two largest contributers to PC2, while wind is the smallest contributer to PC2
+
+- There is a strong positive correlation between the warmest temperature quarter, the coldest temperature quarter and the mean annual temperature. This result is expected. Similarly there is positive correlation between the wettest rain quarter, the dryest rain quarter and the mean annual rain.
+
+- There appears to be very little correlation, to maybe a slight negative correlation between cropland cover and tree canopy cover.
+
+- There is a strong negative correlation between cropland cover and annual mean temperature.

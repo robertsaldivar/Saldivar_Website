@@ -1,0 +1,115 @@
+---
+title: "Geospatial Analysis"
+author: "Robert Saldivar"
+date: "March 1, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = F, warning = F)
+```
+
+Map of Hawaiian Land Use/Land Cover and Watersheds
+
+```{r}
+#Loading the packages that will be used for this analysis
+
+# Packages for general use:
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(here)
+library(RColorBrewer)
+
+# Packages for spatial analysis:
+library(sf)
+library(tmap)
+library(mapview)
+
+```
+
+
+```{r}
+# Reading in the data:
+
+HI_LULC <- read_sf(dsn = here("data"), layer = "Land_Use_Land_Cover_LULC")
+
+
+HI_watersheds <- read_sf(dsn = here("data"), layer = "Watersheds")
+
+```
+
+
+```{r}
+#This code chunk is for an initial exploration of the spatial data and wrangling of the data
+
+plot(HI_LULC)
+#The CRS of HI_LULC is 4326
+ 
+plot(HI_watersheds)
+#The CRS of HI_watersheds is 4326
+
+
+
+```
+
+
+```{r}
+#This code chunk is going to subset the all of the HI islands to just the island of Ni'ihau
+
+Ni_ihau_LULC <- HI_LULC %>%
+  filter(objectid == 112 |objectid == 119 |objectid == 148 |objectid == 161 |objectid == 164 |objectid == 168 |objectid == 190 |objectid == 203 |objectid == 205 |objectid == 222 |objectid == 223 |objectid == 225 |objectid == 229 |objectid == 230 |objectid == 231 |objectid == 232 |objectid == 233 |objectid == 234 |objectid == 235 |objectid == 236 |objectid == 237) %>%
+  select(landcover) %>%
+  mutate(landcover = case_when(
+    landcover == "Bare Exposed Rock" ~ "Bare Rock",
+    landcover == "Beaches" ~ "Beaches",
+    landcover == "Lakes" ~ "Lakes",
+    landcover == "Mixed Barren Land" ~ "Mixed Barren Land",
+    landcover == "Mixed Rangeland" ~ "Mixed Rangeland",
+    landcover == "Orchards, Groves, Vineyards, Nurseries and Ornamental Horticultural Areas" ~ "Agricultural",
+    landcover == "Residental" ~ "Residental",
+    landcover == "Shrub and Brush Rangeland" ~ "Shrub and Brush Rangeland"
+  ))
+#By finding the object id's for Ni'ihau I was able to filter so that I have only looking at the land cover for the island of Ni'ihau. This is is also chaning the landcover names
+
+# I am then going to clip the Ni'ihau land cover with the watersheds so the only the watersheds of so that only the water sheds is left.
+
+Ni_ihau_watersheds <- st_intersection(HI_watersheds, Ni_ihau_LULC) %>%
+  select(wuname) #selecting one variable to be visualized on the map.
+
+plot(Ni_ihau_LULC)
+plot(Ni_ihau_watersheds)
+
+```
+
+
+```{r}
+#This is going to be a map of the land use types for the Hawaiian islands
+
+Ni_ihau_LULC_plot <- ggplot(Ni_ihau_LULC) +
+  geom_sf(aes(fill = landcover), color = "NA", show.legend = T) +
+  theme_classic() +
+  labs(x = "Longitude (decimal degrees)", y = "Latitude (decimal degrees)") +
+  ggtitle("Ni'ihau Landcover Map")
+
+Ni_ihau_LULC_plot
+
+```
+
+Figure 1. This map is displaying the landcover types on the island of Ni'ihau, Hawaii. The island is dominated by the landcover of Shrub and Brush Rangeland.
+
+```{r}
+#This is going to a map of the watersheds in the Hawaiian islands
+
+Ni_ihau_watersheds_plot <- ggplot(Ni_ihau_watersheds) +
+  geom_sf(aes(fill = wuname)) +
+  theme_classic() +
+  labs(x = "Longitude (decimal degrees)", y = "Latitude (decimal degrees)") +
+  ggtitle("Ni'ihau Watershed Map")
+
+Ni_ihau_watersheds_plot
+
+```
+
+Figure 2. This map is displaying the watersheds on the island of Ni'ihau, Hawaii. There are 13 distinct watersheds on the island.
+

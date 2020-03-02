@@ -1,0 +1,155 @@
+---
+title: "Time Series Analysis"
+author: "Robert Saldivar"
+date: "March 1, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, messages = F, warning = F)
+```
+
+Time series data wrangling and visualization
+
+```{r}
+#loading the packages that I think that I will need for this time series analysis
+
+#Packages for general use:
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(here)
+library(RColorBrewer)
+library(knitr)
+
+#Packages for time series use:
+library(tsibble)
+library(fable)
+library(fabletools)
+library(feasts)
+
+# Reading in the data that will be analyzed:
+steelhead_passage <- read_csv(here("data", "cbr_fish_passage_bonneville_allyrs_steelhead.csv")) 
+```
+
+
+
+1. Summary of the project.
+The data for this project is from Columbia Basin Research, which measured the number of Steelhead passing through the Bonneville Dam. The analysis in this markdown down document summarizes the daily, monthly, and annual number of steelhead passing through the Bonneville Dam. 
+
+2. Images of Bonneville Dam and/or steelhead
+
+```{r}
+knitr::include_graphics("images/bonneville-dam-and-people-fishing.jpg")
+
+```
+
+Figure 1. Peopele Fishing in front of Bonneville Dam. Citation: "Bonneville Dam and people fishing". goofreephotos.com, accessed 2/20/2020
+<https://www.goodfreephotos.com/united-states/oregon/other-oregon/bonneville-dam-and-people-fishing.jpg.php>
+
+
+3. code
+
+```{r}
+# This code chunk is going to parse and arrange the dates in the data so that it can be separated by months individually and a single column with all of the elements of a date. I am also making sure that each part of the date is treated like a date in R's brain.
+
+steelhead_date <- steelhead_passage %>%
+  clean_names() %>%
+  separate(mm_dd, c("day", "month"))
+
+steelhead_date$date <- paste(steelhead_date$year, steelhead_date$month, steelhead_date$day, sep = "-") %>%
+  ymd() %>%
+  as.Date()
+
+steelhead_parsed <- steelhead_date %>%
+  mutate(month = month(date, label = TRUE)) %>%
+  mutate(month_sep = yearmonth(date)) %>%
+  drop_na()
+
+
+```
+
+
+```{r}
+#This code chunk is going to create a time series plot of daily observation of steelhead passing through the dam.
+
+steelhead_daily_plot <- ggplot(data = steelhead_parsed, aes(x = date, y = value)) +
+  geom_line() + #This is the base code to create the graph, now I am going to make the graph look nice
+  theme_bw() +
+  labs(x = "Date", y = "Steelhead Passage (fish/day)") +
+  ggtitle("Daily Steelhead Passage Through Bonneville Dam (1939-2019)")
+
+steelhead_daily_plot
+
+```
+
+Figure 2. The Daily Steelhead Passage Through Bonneville Dam. The daily passage is faily consistent from 1940 to 2000. After 2000 it the the daily passage appears to increase.
+
+
+```{r}
+#This code chunk is going to total the monthly counts of steelhead passing through the dam
+
+steelhead_monthly_summary <- steelhead_parsed %>%
+  group_by(year, month) %>%
+  summarise(
+    count = sum(value)
+  ) 
+```
+
+
+```{r}
+#This code chunk is going to explore the monthly passage of steelhead through the dam over time.
+
+steelhead_month_plot <- ggplot(data = steelhead_monthly_summary, aes(x = month, y= count, group = year)) +
+  geom_line(aes(color = year)) + #This is the base code to create the graph, now I am going to make the graph look nice
+  theme_bw() +
+  labs(x = "Month", y = "Steelhead Passage (fish)") +
+  ggtitle("Monthly Steelhead Passage Through Bonneville Dam (1939-2019)") +
+  scale_y_continuous() +
+  scale_color_gradientn(colors = c(
+    "red",
+    "orange",
+    "yellow",
+    "gold",
+    "green",
+    "blue",
+    "purple",
+    "violet"
+  ))
+  
+
+steelhead_month_plot
+
+```
+
+Figure 3. Monthly Steelhead Passage Through Bonneville Dam. Between June and October is when the most Steelhead pass through Bonneville Dam.
+
+
+```{r}
+#this code chuck i going to summarise the the annual counts of steelhead passage.
+
+steelhead_annual_summary <- steelhead_parsed %>%
+  group_by(year) %>%
+  summarise(
+    count = sum(value)
+  )
+```
+
+
+```{r}
+#This code chuck is going to show the annual total of steelhead passing through the dam.
+
+steelhead_annual_plot <- ggplot(data = steelhead_annual_summary, aes(x = year, y = count)) +
+  geom_line(color = "blue") +
+  geom_smooth(color = "red",
+              size = 0.2,
+              linetype = "dashed",
+              fill = "red",
+              alpha = 0.2) +
+  theme_bw() +
+  labs(x = "Year", y = "Steelhead Passage (fish)")+
+  ggtitle("Annual Steelhead Passage Through Bonneville Dam (1939-2019)")
+
+steelhead_annual_plot
+
+```
