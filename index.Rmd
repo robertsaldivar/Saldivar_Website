@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Biography:
+[Biography](https://robertsaldivar.github.io/Saldivar_Website/biography)
 
 
 **Example Code**
@@ -18,7 +18,7 @@ Biography:
 [Data Wrangling and Visualization](https://robertsaldivar.github.io/Saldivar_Website/Wrangling_Visualization)
 
 
-[Principle Components Analysis](https://robertsaldivar.github.io/Saldivar_Website/)
+[Principle Components Analysis](https://robertsaldivar.github.io/Saldivar_Website/PCA)
 
 [Time Series Analysis](https://robertsaldivar.github.io/Saldivar_Website/time_series)
 

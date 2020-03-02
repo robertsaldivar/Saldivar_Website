@@ -1,0 +1,29 @@
+---
+title: "Biography"
+author: "Robert Saldivar"
+date: "March 2, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(knitr)
+#image of me
+
+knitr::include_graphics("images/Robert_Saldivar_001.jpg")
+
+```
+
+
+Biography:
+
+
+
+
+[LinkedIn](https://www.linkedin.com/in/robert-saldivar-154a922b/)
+
+[GitHub](https://github.com/robertsaldivar)
