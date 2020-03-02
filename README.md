@@ -1,31 +1,26 @@
-# Saldivar_Website
-creating a website with github pages for ESM 244
-
-
-This will be a website to for sharing my code with future employers
-
-Biography:
-
-Resume:
-
-
-[Data Wrangling and Visualization](https://robertsaldivar.github.io/Saldivar_Website/Wrangling_Visualization)
+# Robert's Awesome Blog for Sharing Code
 
 
 
-[Principle Components Analysis](https://robertsaldivar.github.io/Saldivar_Website/)
+#[Biography](https://robertsaldivar.github.io/Saldivar_Website/biography)
 
 
 
-Time Series Analysis
+#**Example Code**
 
 
-Geospatial Analysis in R:
+###[Data Wrangling and Visualization](https://robertsaldivar.github.io/Saldivar_Website/Wrangling_Visualization)
 
 
+###[Principle Components Analysis](https://robertsaldivar.github.io/Saldivar_Website/PCA)
 
-Interactive map with QGIS:
-https://robertsaldivar.github.io/ESM267-web/qgis2web/#7/43.871/-73.293
+###[Time Series Analysis](https://robertsaldivar.github.io/Saldivar_Website/time_series)
+
+
+###[Geospatial Analysis in R](https://robertsaldivar.github.io/Saldivar_Website/Hawaii_Maps)
+
+
+###[Interactive map with QGIS](https://robertsaldivar.github.io/ESM267-web/qgis2web/#7/43.871/-73.293)
 
 
 
