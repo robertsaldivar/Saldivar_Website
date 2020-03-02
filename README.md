@@ -9,11 +9,11 @@ Biography:
 Resume:
 
 
-Data Wrangling and Visualization:
+[Data Wrangling and Visualization](https://robertsaldivar.github.io/Saldivar_Website/Wrangling_Visualization)
 
 
 
-Principle Components Analysis:
+[Principle Components Analysis](https://robertsaldivar.github.io/Saldivar_Website/)
 
 
 
