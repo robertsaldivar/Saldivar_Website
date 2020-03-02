@@ -14,7 +14,7 @@ library(tidyverse)
 library(knitr)
 #image of me
 
-knitr::include_graphics("images/Robert_Saldivar_001.jpg")
+knitr::include_graphics("images/Saldivar_Robert.jpg")
 
 ```
 
