@@ -10,19 +10,18 @@ Resume:
 
 
 Data Wrangling and Visualization:
-https://robertsaldivar.github.io/Saldivar_Website/example_code/HW1_Task1_RS.html
 
 
-Principle components analysis:
-https://robertsaldivar.github.io/Saldivar_Website/example_code/HW1_Task2_RS.html
+
+Principle Components Analysis:
 
 
-Time Series analysis
-https://robertsaldivar.github.io/Saldivar_Website/example_code/Hw2_Task2.html
+
+Time Series Analysis
 
 
-Geospatial analysis in R:
-https://robertsaldivar.github.io/Saldivar_Website/example_code/Hw2_Task3.html
+Geospatial Analysis in R:
+
 
 
 Interactive map with QGIS:
