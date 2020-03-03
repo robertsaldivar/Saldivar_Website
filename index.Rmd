@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #[Biography](https://robertsaldivar.github.io/Saldivar_Website/biography)
 
-#[Resume](https://robertsaldivar.github.io/Saldivar_Website/Wrangling_Visualization)
+#[Resume](https://robertsaldivar.github.io/Saldivar_Website/resume)
 
 
 
