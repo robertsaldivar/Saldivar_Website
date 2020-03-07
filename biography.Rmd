@@ -10,7 +10,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-library(tidyverse)
 library(knitr)
 #image of me
 
@@ -20,7 +19,7 @@ knitr::include_graphics("images/Saldivar_Robert.jpg")
 
 
 Biography:
-
+Robert Saldivar is currently a second year Master's student at the Bren School of Environmental Science and Management at University of California, Santa Barbara. Robert is studying Conservation Planning and Enironmental Data Science.
 
 
 

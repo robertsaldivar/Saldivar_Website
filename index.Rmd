@@ -9,6 +9,12 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Purpose:
+This site is for sharing different types of of code to better understand data science tools and methods.
+
+
+
+
 #[Biography](https://robertsaldivar.github.io/Saldivar_Website/biography)
 
 #[Resume](https://robertsaldivar.github.io/Saldivar_Website/resume)
