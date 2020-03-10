@@ -33,7 +33,7 @@ This site is for sharing different types of of code to better understand data sc
 [Geospatial Analysis in R](https://robertsaldivar.github.io/Saldivar_Website/Hawaii_Maps)
 
 
-**Functions**
+**Example Functions**
 
 [Population Growth With Harvest Function](https://robertsaldivar.github.io/Saldivar_Website/popgrow)
 
